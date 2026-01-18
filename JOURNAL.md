@@ -20,3 +20,6 @@ The older version   @tailwind base;
                     @tailwind components;
                     @tailwind utilities; 
 Now the new version is @import "tailwindcss";
+
+Day2: I forget to write the Journal.
+Day3: Actualy it was Saturday and i enjoy my weekend by sleeping whole day and at night i just go through how much work i did in this and how much i have to and which files  reqired to work. 
