@@ -1,14 +1,17 @@
 export const studentClubs = [
     {
         id:"tech",
-        name:"NST-SDC"
+        name:"NST-SDC",
+        members:42,
     },
     {
         id:"robotics",
-        name:"Robotics Club"
+        name:"Robotics Club",
+        members:45
     },
     {
         id:"cltural",
-        naame:"Cltursl Club"
+        name:"Cltural Club",
+        members:78
     }
 ]

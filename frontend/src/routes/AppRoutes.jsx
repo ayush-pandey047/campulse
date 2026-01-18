@@ -12,6 +12,7 @@ import StudentDashboard from "../pages/student/StudentDashboard.jsx";
 import StudentCalender from "../pages/student/StudentCalendar.jsx";
 import StudentLayout from "../components/layout/StudentLayout.jsx";
 import StudentClubOverview from "../pages/student/StudentClubOverview.jsx"
+import StudentEvents from "../pages/student/StudentEvents.jsx"
 
 import ClubIncLayout from "../components/layout/ClubincLayout.jsx"
 import ClubIncDashboard from "../pages/club/ClubIncDashboard.jsx";
@@ -38,6 +39,7 @@ export default function AppRoute(){
                      <Route path="dashboard" element={<StudentDashboard />} />
                      <Route path="calender" element={<StudentCalender />} />
                      <Route path="clubs/:clubId" element={<StudentClubOverview />} />
+                     <Route path="events" element={<StudentEvents/>}/>
             </Route>
 
             /** THIS IS FOR ClubInc CONECTNG*/

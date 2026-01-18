@@ -23,3 +23,17 @@ Now the new version is @import "tailwindcss";
 
 Day2: I forget to write the Journal.
 Day3: Actualy it was Saturday and i enjoy my weekend by sleeping whole day and at night i just go through how much work i did in this and how much i have to and which files  reqired to work. 
+
+Day4:
+        first issue in StatCard: 
+                                // export default function StatCard(title,value,subtitle){
+                                //     return (
+                                //         <div className="br-white dark:bg-slate-800 rounded-xl p-5 shadow-md hover:shadow-lg transition">
+                                //             <h4 className="text-sm text-gray-500 dark:text-gray-400">{title}</h4>
+                                //             <p className="text-3x1 font-bold text-gray-500 dark:text-gray-800 dark:text-white mt-2">{value}</p>
+                                //             <p className="text-xs text-gray-400 mt-1">{subtitle}</p>
+                                //         </div>
+                                //     )
+                                // }
+
+        So the issue in (title,value,subtitle) but is have to make them keys not plain text or obejct so i have to write them inside {}.

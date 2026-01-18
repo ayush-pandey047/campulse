@@ -1,7 +1,8 @@
-export default function Studentcal(){
+export default function StudentCalendar(){
     return(
-        <>
-        <h4>Student Cal</h4>
-        </>
+       <>
+        <h1 className="text-2xl font-bold mb-4">Calendar</h1>
+        <p className="text-gray-600">Event calendar will shown here</p>
+       </>
     )
 };

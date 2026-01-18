@@ -8,7 +8,7 @@ export const facultyMenu = [
 export const studentMenu = [
     {label: "Dashboard", path:'/student/dashboard'},
     {label: "Calendar", path:"/student/calendar" },
-    {label:"Explore Events" , path:"student/events"}
+    {label:"Events" , path:"student/events"}
 ];
 
 export const clubMenu = [
