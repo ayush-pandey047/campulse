@@ -3,6 +3,7 @@ import { studentClubs } from "../../utils/mockClubs.js";
 import StatCard from "../../components/common/StatCard.jsx";
 import EventCard from "../../components/common/EventCard.jsx";
 import { useState } from "react";
+import { useEffect } from "react";
 
 export default function StudentClubOverview() {
     const { clubId } = useParams();
@@ -10,8 +11,6 @@ export default function StudentClubOverview() {
     const club = studentClubs.find(
         (c) => c.id === clubId
     );
-
-    const [isMember, setIsMember] = useState( club.memberList.some((m) => m.nam === "Ayush Pandey"))
 
     if (!club) {
         return (
@@ -22,6 +21,25 @@ export default function StudentClubOverview() {
             </div>
         )
     }
+
+    const [isMember, setIsMember] = useState( club.memberList.some((m) => m.name === "Ayush Pandey"))
+    const [requestStatus, setRequestStatus] = useState(null)
+
+    useEffect(() => {
+        if (requestStatus === "join-pending") {
+          setTimeout(() => {
+            setIsMember(true);
+            setRequestStatus(null);
+          }, 2000);
+        }
+      
+        if (requestStatus === "leave-pending") {
+          setTimeout(() => {
+            setIsMember(false);
+            setRequestStatus(null);
+          }, 2000);
+        }
+      }, [requestStatus]);
 
     return (
         <div className="p-6 space-y-6">
@@ -34,22 +52,38 @@ export default function StudentClubOverview() {
                 </p>
             </div>
 
-            {/*Indvidual reuest to join the club and leave */}
-
-            <div>
-                {isMember ? (
-                    <button 
-                        onClick={()=> setIsMember(false)} 
-                        className="px-4 py-2 py-2 bg-red-500 text-white rounded hover:bg-red-600">
-                            Leave Club
+            {/* Student can request for joining or leaving the club */}
+            <div className="space-x-2">
+                
+                {!isMember && requestStatus !== "join-pending" && (
+                    <button
+                        onClick={() => setRequestStatus("join-pending")}
+                        className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
+                        >
+                    Request to Join Club
                     </button>
-                ): (
-                    <button onClick={()=> setIsMember(true)}
-                    className="px-4 py-2 py-2 bg-green-500 text-white rounded hover:bg-green-600">
-                        JOIN CLUB
+                )}
+
+                {isMember && requestStatus !== "leave-pending" && (
+                    <button
+                    onClick={() => setRequestStatus("leave-pending")}
+                    className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
+                >
+                    Request to Leave Club
+                    </button>
+                )}
+
+                {(requestStatus === "join-pending" ||
+                    requestStatus === "leave-pending") && (
+                    <button
+                        disabled
+                        className="px-4 py-2 bg-gray-300 text-gray-600 rounded cursor-not-allowed"
+                    >
+                    Request Pending
                     </button>
                 )}
             </div>
+
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 {/* <div className="bg-white p-4 rounded shadow">
