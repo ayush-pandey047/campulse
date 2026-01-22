@@ -1,7 +1,8 @@
 import Navbar from "./Navbar";
 import Sidebar from "./Sidebar";
+import { Outlet } from "react-router-dom";
 
-export default function FacultyLayout({children}){
+export default function FacultyLayout(){
     return (
         <div>
             <Navbar/>
@@ -10,7 +11,7 @@ export default function FacultyLayout({children}){
                     <p>ClubInc Menu</p>
                 </Sidebar>
                 <main className="flex-1 p-4">
-                    {childer}
+                    <Outlet/>
                 </main>
             </div>
         </div>

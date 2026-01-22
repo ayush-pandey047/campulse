@@ -1,18 +1,23 @@
-import { studentClubs } from "./mockClubs";
-
-export const mockRequests = [
+const clubRequests = [
     {
-        id:1,
-        studentName:"Ayush P",
-        clubId:"Robotics",
-        type:"join",
-        status:"pending"
+      id: 1,
+      studentName: "Ayush Pandey",
+      studentId: "2024-B-29112006",
+      clubId: "Robotics",
+      clubName: "Robotics",
+      type: "JOIN",
+      status: "PENDING",
     },
     {
-        id:2,
-        studentName:"Saju PO",
-        clubId:"Robotics",
-        type:"leave",
-        status:"pending"
-    }
-]
+      id: 2,
+      studentName: "Saju PO",
+      studentId: "2024-A-06042006",
+      clubId: "Robotics",
+      clubName: "Robotics",
+      type: "LEAVE",
+      status: "PENDING",
+    },
+  ];
+  
+  export default clubRequests;
+  

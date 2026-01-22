@@ -16,5 +16,6 @@ export const clubMenu = [
     { label: "Calendar", path:"/club/calendar" },
     { label:"My Events" , path:"/club/events"},
     { label:"Reports", path:"/club/reports"},
-    { label:"Attendance", path:"/club/attendance"}
+    { label:"Attendance", path:"/club/attendance"},
+    { label:"Requests", path:"/club/requests"}
 ]

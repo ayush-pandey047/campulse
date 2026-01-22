@@ -1,32 +1,73 @@
 import { useState } from "react";
-import { mockRequests } from "../../utils/mockRequ";
+import clubRequests from "../../utils/mockRequ";
 
-export default function ClubRequests(){
-    const [requests,setRequest] = useState();
+export default function ClubIncRequests() {
+  const [requests, setRequests] = useState(clubRequests);
 
-    const handelAction = (id,action) => {
-        setRequest((prev) => 
-                prev.map((req) => 
-                    req.id === id
-                       ? {...req, status:action}
-                    : req
-                )
-            )
-        }
+  const handleAction = (id, action) => {
+    setRequests((prev) =>
+      prev.map((req) =>
+        req.id === id ? { ...req, status: action } : req
+      )
+    );
+  };
 
-    return (
-        <div className="p-6 space-y-4">
-            <h1 className="text-2xl font-bold">
-                Club Rquests
-            </h1>
-            {requests.length === 0 && (
-                <div>
-                    <div>
-                        <p>{req.studentName}</p>
-                        <p>Request to {req.type} club</p>
-                    </div>
-                </div>
-            )}
+  const pendingRequests = requests.filter(
+    (req) => req.status === "PENDING"
+  );
+
+  return (
+    <div className="p-6">
+      <h1 className="text-2xl font-bold mb-6">
+        Club Requests
+      </h1>
+
+      {pendingRequests.length === 0 ? (
+        <p className="text-gray-500">
+          No pending requests
+        </p>
+      ) : (
+        <div className="space-y-4">
+          {pendingRequests.map((req) => (
+            <div
+              key={req.id}
+              className="bg-white p-4 rounded shadow flex justify-between items-center"
+            >
+              <div>
+                <p className="font-semibold">
+                  {req.studentName}
+                </p>
+                <p className="text-sm text-gray-500">
+                  {req.type === "JOIN"
+                    ? "Requested to JOIN"
+                    : "Requested to LEAVE"}{" "}
+                  {req.clubName}
+                </p>
+              </div>
+
+              <div className="flex gap-2">
+                <button
+                  onClick={() =>
+                    handleAction(req.id, "APPROVED")
+                  }
+                  className="px-3 py-1 bg-green-500 text-white rounded"
+                >
+                  Approve
+                </button>
+
+                <button
+                  onClick={() =>
+                    handleAction(req.id, "REJECTED")
+                  }
+                  className="px-3 py-1 bg-red-500 text-white rounded"
+                >
+                  Reject
+                </button>
+              </div>
+            </div>
+          ))}
         </div>
-    )
+      )}
+    </div>
+  );
 }

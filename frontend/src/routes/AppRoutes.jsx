@@ -17,6 +17,7 @@ import StudentEvents from "../pages/student/StudentEvents.jsx"
 import ClubIncLayout from "../components/layout/ClubincLayout.jsx"
 import ClubIncDashboard from "../pages/club/ClubIncDashboard.jsx";
 import ClubCInCalender from "../pages/club/ClubIncCalendar.jsx";
+import ClubIncRequests from "../pages/club/ClubRequest.jsx";
 
 
 export default function AppRoute(){
@@ -46,6 +47,7 @@ export default function AppRoute(){
             <Route path="/club" element={<ClubIncLayout />}>
                     <Route path="dashboard" element={<ClubIncDashboard />} />
                     <Route path="calender" element={<ClubCInCalender />} />
+                    <Route path="requests" element={<ClubIncRequests/>}/>
             </Route>
           </Routes>
         </BrowserRouter>

@@ -1,9 +1,9 @@
 import { NavLink } from "react-router-dom";
 
-export default function Sidebar({ menu, clubs }) {
+export default function Sidebar({ menu = [], clubs = [] }) {
   return (
     <aside className="w-64 min-h-screen border-r bg-white p-4">
-      
+
       {/* MENU */}
       <div className="mb-8">
         <h2 className="text-sm font-semibold text-gray-500 mb-3">
@@ -61,6 +61,7 @@ export default function Sidebar({ menu, clubs }) {
           ))}
         </ul>
       </div>
+
     </aside>
   );
 }
