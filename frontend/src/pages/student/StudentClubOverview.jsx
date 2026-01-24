@@ -4,6 +4,7 @@ import StatCard from "../../components/common/StatCard.jsx";
 import EventCard from "../../components/common/EventCard.jsx";
 import { useState } from "react";
 import { useEffect } from "react";
+import clubRequests from "../../utils/mockRequ.js";
 
 export default function StudentClubOverview() {
     const { clubId } = useParams();
@@ -22,98 +23,95 @@ export default function StudentClubOverview() {
         )
     }
 
-    const [isMember, setIsMember] = useState( club.memberList.some((m) => m.name === "Ayush Pandey"))
-    const [requestStatus, setRequestStatus] = useState(null)
+    const loggedInStudentId = "stu_1";
+    const myRequest = clubRequests.find(
+        (r) => r.clubId === club.id && r.studentId === loggedInStudentId
+      );
 
-    useEffect(() => {
-        if (requestStatus === "join-pending") {
-          setTimeout(() => {
-            setIsMember(true);
-            setRequestStatus(null);
-          }, 2000);
-        }
+    const isMember = myRequest?.status === "APPROVED";
+
+
+    // const [isMember, setIsMember] = useState( club.memberList.some((m) => m.name === "Ayush Pandey"))
+    // const [requestStatus, setRequestStatus] = useState(null)
+
+    // useEffect(() => {
+    //     if (requestStatus === "join-pending") {
+    //       setTimeout(() => {
+    //         setIsMember(true);
+    //         setRequestStatus(null);
+    //       }, 2000);
+    //     }
       
-        if (requestStatus === "leave-pending") {
-          setTimeout(() => {
-            setIsMember(false);
-            setRequestStatus(null);
-          }, 2000);
-        }
-      }, [requestStatus]);
+    //     if (requestStatus === "leave-pending") {
+    //       setTimeout(() => {
+    //         setIsMember(false);
+    //         setRequestStatus(null);
+    //       }, 2000);
+    //     }
+    //   }, [requestStatus]);
+
+     
+
+
 
     return (
         <div className="p-6 space-y-6">
             <div>
-                <h1 className="text-2xl font-bold mb-2">
-                    {club.name}
-                </h1>
-                <p className="text-gray-600">
-                    {club.description}
-                </p>
+                <h1 className="text-2xl font-bold mb-2"> {club.name} </h1>
+                <p className="text-gray-600"> {club.description} </p>
             </div>
 
             {/* Student can request for joining or leaving the club */}
             <div className="space-x-2">
-                
-                {!isMember && requestStatus !== "join-pending" && (
-                    <button
-                        onClick={() => setRequestStatus("join-pending")}
-                        className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
-                        >
-                    Request to Join Club
-                    </button>
-                )}
-
-                {isMember && requestStatus !== "leave-pending" && (
-                    <button
-                    onClick={() => setRequestStatus("leave-pending")}
-                    className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
+                {myRequest ? (
+                <span
+                    className={`px-3 py-1 rounded text-sm font-medium ${
+                    myRequest.status === "PENDING"
+                    ? "bg-yellow-100 text-yellow-700"
+                    : myRequest.status === "APPROVED"
+                    ? "bg-green-100 text-green-700"
+                    : "bg-red-100 text-red-700"
+                    }`}>
+                    {myRequest.status}  
+                </span>) : (
+                <button
+                    onClick={() => setRequestStatus("join-pending")}
+                    className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
                 >
-                    Request to Leave Club
-                    </button>
-                )}
-
-                {(requestStatus === "join-pending" ||
-                    requestStatus === "leave-pending") && (
-                    <button
-                        disabled
-                        className="px-4 py-2 bg-gray-300 text-gray-600 rounded cursor-not-allowed"
-                    >
-                    Request Pending
-                    </button>
-                )}
-            </div>
-
-
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                {/* <div className="bg-white p-4 rounded shadow">
-                    <h3 className="text-sm text-gray-500">Members</h3>
-                    <p className="text-xl font-bold">{club.members}</p>
+                Request to Join Club
+                </button>)}
                 </div>
 
-                <div className="bg-white p-4 rounded shadow" >
-                    <h3 className="text-sm text-gray-500">Events</h3>
-                    <p className="text-xl font-bold">{club.events.length}</p>
-                </div>
-                <div className="bg-white p-4 rounded shadow">
-                    <h3 className="text-sm text-gray-500">Role</h3>
-                    <p className="text-xl font-bold">Member</p>
-                </div>
 
-                <div className="bg-white p-4 rounded shadow">
-                    <h3 className="text-sm text-gray-500">Status</h3>
-                    <p className="text-xl font-bold">Active</p>
-                </div> */}
-                <StatCard
-                    title="Members"
-                    value={club.members}/>
-                <StatCard
-                    title="Total Events"
-                    value={club.events.length}/>
-                <StatCard
-                    title="Status"
-                    value="Active"/>
-            </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                            {/* <div className="bg-white p-4 rounded shadow">
+                                <h3 className="text-sm text-gray-500">Members</h3>
+                                <p className="text-xl font-bold">{club.members}</p>
+                            </div>
+
+                            <div className="bg-white p-4 rounded shadow" >
+                                <h3 className="text-sm text-gray-500">Events</h3>
+                                <p className="text-xl font-bold">{club.events.length}</p>
+                            </div>
+                            <div className="bg-white p-4 rounded shadow">
+                                <h3 className="text-sm text-gray-500">Role</h3>
+                                <p className="text-xl font-bold">Member</p>
+                            </div>
+
+                            <div className="bg-white p-4 rounded shadow">
+                                <h3 className="text-sm text-gray-500">Status</h3>
+                                <p className="text-xl font-bold">Active</p>
+                            </div> */}
+                        <StatCard
+                            title="Members"
+                            value={club.members}/>
+                        <StatCard
+                            title="Total Events"
+                            value={club.events.length}/>
+                        <StatCard
+                            title="Status"
+                            value="Active"/>
+                    </div>
 
 
             {/* The Upcoming Events*/}
@@ -136,9 +134,7 @@ export default function StudentClubOverview() {
             {/* Club Memebers and their roles*/}
 
             { isMember &&  (<div>
-                <h2 className="text-lg font-semibold mb-3">
-                    Club Members
-                </h2>
+                <h2 className="text-lg font-semibold mb-3"> Club Members </h2>
                 <div className="bg-white rounded-lg shadow divide-y">
                     {club.memberList.map((member)=>(
                         <div 

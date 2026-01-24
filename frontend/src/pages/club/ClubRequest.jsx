@@ -5,6 +5,12 @@ export default function ClubIncRequests() {
   const [requests, setRequests] = useState(clubRequests);
 
   const handleAction = (id, action) => {
+    const request = requests.find((r) => r.id === id);
+
+    if (action === "APPROVED" && request.type === "LEAVE") {
+      console.log(`${request.studentName} removed from club`);
+    }
+
     setRequests((prev) =>
       prev.map((req) =>
         req.id === id ? { ...req, status: action } : req

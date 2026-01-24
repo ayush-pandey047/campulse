@@ -47,3 +47,5 @@ Day5:
                         Club Incharge --> Approval/Reject
                                 ⬇️
                         System updates memberships
+Day6:
+        Issue in club/requests url for finding the approved and rejected students but can't  see them bcz of  using {children} on the place of Outlets.
