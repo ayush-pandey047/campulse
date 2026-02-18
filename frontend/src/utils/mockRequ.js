@@ -17,6 +17,24 @@ const clubRequests = [
       type: "LEAVE",
       status: "APPROVED",
     },
+    {
+      id: 3,
+      studentId: "stu_5",
+      studentName: "Rohit",
+      clubId: "SDC",
+      clubName: "NST-SDC",
+      type: "JOIN",
+      status: "PENDING"
+    },
+    {
+      id: 4,
+      studentId: "stu_7",
+      studentName: "Ananya",
+      clubId: "robotics",
+      clubName: "Robotics Club",
+      type: "JOIN",
+      status: "PENDING"
+    }
   ];
   
   export default clubRequests;

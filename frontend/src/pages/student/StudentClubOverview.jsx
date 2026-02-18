@@ -13,6 +13,10 @@ export default function StudentClubOverview() {
         (c) => c.id === clubId
     );
 
+   
+
+
+
     if (!club) {
         return (
             <div className="p-6">
@@ -24,35 +28,29 @@ export default function StudentClubOverview() {
     }
 
     const loggedInStudentId = "stu_1";
+
     const myRequest = clubRequests.find(
         (r) => r.clubId === club.id && r.studentId === loggedInStudentId
       );
 
-    const isMember = myRequest?.status === "APPROVED";
+    const isMember = club.members.includes(loggedInStudentId);
+
+    const handleRequest = (type) => {
+        clubRequests.push({
+            id:Date.now(),
+            studentId: loggedInStudentId,
+            studentName: "Ayush",
+            clubId: club.id,
+            clubName: club.name, 
+            type,
+            status: "Pending"
+        });
+
+        alert("Request Sent!");
+    }
 
 
-    // const [isMember, setIsMember] = useState( club.memberList.some((m) => m.name === "Ayush Pandey"))
-    // const [requestStatus, setRequestStatus] = useState(null)
-
-    // useEffect(() => {
-    //     if (requestStatus === "join-pending") {
-    //       setTimeout(() => {
-    //         setIsMember(true);
-    //         setRequestStatus(null);
-    //       }, 2000);
-    //     }
-      
-    //     if (requestStatus === "leave-pending") {
-    //       setTimeout(() => {
-    //         setIsMember(false);
-    //         setRequestStatus(null);
-    //       }, 2000);
-    //     }
-    //   }, [requestStatus]);
-
-     
-
-
+    
 
     return (
         <div className="p-6 space-y-6">
@@ -72,16 +70,35 @@ export default function StudentClubOverview() {
                     ? "bg-green-100 text-green-700"
                     : "bg-red-100 text-red-700"
                     }`}>
-                    {myRequest.status}  
-                </span>) : (
-                <button
-                    onClick={() => setRequestStatus("join-pending")}
-                    className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-                >
-                Request to Join Club
-                </button>)}
-                </div>
-
+                    {myRequest.status} 
+                </span>) 
+                : 
+                (<div className="my-4">
+                    {isMember ? (
+                        <button className="bg-red-500 text-white px-4 py-2 rounded">
+                        Leave Club
+                        </button>
+                    ) : myRequest ? (
+                        <span
+                        className={`px-3 py-1 rounded text-sm font-medium ${
+                            myRequest.status === "PENDING"
+                            ? "bg-yellow-100 text-yellow-700"
+                            : myRequest.status === "APPROVED"
+                            ? "bg-green-100 text-green-700"
+                            : "bg-red-100 text-red-700"
+                        }`}
+                        >
+                        {myRequest.status}
+                        </span>
+                        ) : (
+                            <button className="bg-blue-600 text-white px-4 py-2 rounded">
+                            Request to Join
+                            </button>
+                        )}
+                        </div>
+                        )}
+                    </div>
+            
 
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                             {/* <div className="bg-white p-4 rounded shadow">
@@ -134,6 +151,7 @@ export default function StudentClubOverview() {
             {/* Club Memebers and their roles*/}
 
             { isMember &&  (<div>
+                
                 <h2 className="text-lg font-semibold mb-3"> Club Members </h2>
                 <div className="bg-white rounded-lg shadow divide-y">
                     {club.memberList.map((member)=>(
